@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<link href='http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+		<style>
+			html {
+				height: 100%;
+			}
+			
+			body {
+				height: 100%;
+				margin: 0px;
+			}
+			
+			p {
+				margin: 0px;
+			}
+			
+			header, body {
+				font-family: 'Noto Sans', sans-serif;
+			}
+			
+			header {
+				background-color: #34495e;
+			}
+				
+			header h1 {
+				font-weight: normal;
+				font-size: 34pt;
+				height: 80px;
+				line-height: 50px;
+				margin: 0px;
+				padding-top: 15px;
+				padding-left: 16px;
+				color: white;
+			}
+			
+			#heading {
+				margin-left: auto;
+			    margin-right: auto;
+				width: 80%;
+				min-width: 600px;
+				max-width: 1200px;
+			}
+			
+			#wrapper {
+				padding: 18px;
+				margin-left: auto;
+			    margin-right: auto;
+				width: calc(80% - 36px);
+				min-width: 600px;
+				max-width: 1200px;
+				min-height: calc(100% - 136px);
+				background-color: #ecf0f1;
+			}
+			
+			table {
+				width: 100%;
+				margin-top: 12px;
+				margin-bottom: 12px;
+				border: 1pt solid #000;
+				border-collapse: collapse;
+				table-layout: fixed;
+			}
+
+			td {
+				border: 1pt solid #000;
+			}
+			
+			.header {
+				width: calc(100% - 16px);
+				padding: 6px 8px;
+				margin-bottom: 6px;
+				background-color: #6C7A89;
+				color: white;
+				font-size: 16pt;
+			}
+			
+			summary:focus {
+				user-select: none;
+				outline: none;
+			}
+		</style>
+		<title>MODE HTML Transformation</title>
+	</head>
+	<body>
+		<header>
+			<div id="heading">
+				<h1>Media Library Collections</h1>
+			</div>
+		</header>
+		<div id="wrapper">
+		[% for (collection in MediaCollection.all) %]
+		[% { %]
+			<details id="[%=collection.name%]">
+				<summary class="header">[%=collection.name%]</summary>
+				<table border="1" cellpadding="3" cellspacing="0">
+					<tr>
+						<th>Artifact Name</th>
+						<th>Source</th>
+						[% if (not collection.mediaArtifacts.first().isTypeOf(EBook)) %]
+						[% { %]
+						<th>Length</th>
+						[% } %]
+					</tr>
+					[% for (media in collection.mediaArtifacts) %]
+					[% { %]
+					<tr>
+						<td>[%=media.name%]</td>
+						<td>[%=media.source%]</td>
+						[% if (not media.isTypeOf(EBook)) %]
+						[% { %]
+						<td>[%=media.length.formatTime()%]</td>
+						[% } %]
+					</tr>
+					[% } %]
+				</table>
+			</details>
+		[% } %]
+		</div>
+		
+		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script>
+        	if (window.location.hash)
+        	{
+        		var collectionTab = document.getElementById(window.location.hash.substring(1));
+        		collectionTab.setAttribute("open", "");
+        	}
+        </script>
+	</body>
+</html>
+
+[%
+	operation Integer formatTime()
+	{
+		var hours = self / 3600;
+		var minutes = (self.mod(3600)) / 60;
+		var seconds = self.mod(60);
+		
+		return hours.toString() + "h " + minutes.toString() + "m " + seconds.toString() + "s";
+	}
+	
+	operation Integer toString()
+	{
+		var number = self.asString();
+		
+		if (number.length() < 2)
+		{
+			return "0" + number;
+		}
+		else
+		{
+			return number;
+		}
+	}
+	
+	/* Begin Reference
+	 *  D. Kolovos. (Nov. 2010). Modulo operation in EOL, [Online].
+	 *  Available: http://www.eclipse.org/forums/index.php/t/200215/
+	 *  (visited on 21/10/2014).
+	*/
+	operation Integer mod(i : Integer)
+	{
+		return self - (self/i * i);
+	}
+	/* End Reference */
+%]
