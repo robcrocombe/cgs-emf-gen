@@ -2,12 +2,12 @@
 	<property name="model" value="" description="The input EMF model"/>
 	
 	<target name="requiredFiles">
-		<manifest>
-			<file path="test.ecore"/>
-			<file path="test.egx"/>
-			<file path="libraries.egl"/>
-			<file path="media.egl"/>
-		</manifest>
+		<gen.manifest>
+			<gen.file path="test.ecore"/>
+			<gen.file path="test.egx"/>
+			<gen.file path="libraries.egl"/>
+			<gen.file path="media.egl"/>
+		</gen.manifest>
 	</target>
 	
 	<target name="loadModels" depends="requiredFiles">
