@@ -1,4 +1,4 @@
-<project name="pacs-generator" default="main">
+<project name="pacs-emf-gen" default="main">
 	<property name="model" value="" description="The input EMF model"/>
 	
 	<target name="requiredFiles">
