@@ -1,16 +1,7 @@
 <project name="pacs-emf-gen" default="main">
 	<property name="model" value="" description="The input EMF model"/>
 	
-	<target name="requiredFiles">
-		<gen.manifest>
-			<gen.file path="test.ecore"/>
-			<gen.file path="test.egx"/>
-			<gen.file path="libraries.egl"/>
-			<gen.file path="media.egl"/>
-		</gen.manifest>
-	</target>
-	
-	<target name="loadModels" depends="requiredFiles">
+	<target name="loadModels">
 	    <epsilon.emf.register file="test.ecore"/>
 	    <epsilon.emf.loadModel name="M" modelfile="${model}" metamodeluri="http://cs.york.ac.uk/" read="true" store="true"/>
 	</target>
