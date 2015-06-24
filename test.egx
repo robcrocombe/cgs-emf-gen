@@ -1,11 +1,11 @@
 rule libraryOutput
 {
 	template: "libraries.egl"
-	target: "gen/libraries.html"
+	target: "libraries.html"
 }
 
 rule mediaOutput
 {
 	template: "media.egl"
-	target: "gen/media.html"
+	target: "media.html"
 }
