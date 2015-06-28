@@ -1,6 +1,5 @@
 <project name="pacs-emf-gen" default="main">
 	<property name="model" value="" description="The input EMF model"/>
-	<invalidelement/>
 	
 	<target name="loadModels">
 	    <epsilon.emf.register file="test.ecore"/>
