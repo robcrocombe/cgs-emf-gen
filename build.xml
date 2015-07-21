@@ -1,5 +1,8 @@
 <project name="pacs-emf-gen" default="main">
+	<!-- #file -->
 	<property name="model" value="" description="The input EMF model"/>
+	<!-- #string #optional -->
+	<property name="mediaOnly" value="false" description="Only generate a page for media in the library"/>
 	
 	<target name="loadModels">
 	    <epsilon.emf.register file="test.ecore"/>
@@ -7,7 +10,10 @@
 	</target>
 	
 	<target name="main" depends="loadModels">
-		<epsilon.egl src="test.egx" outputroot="${outputRoot}">
+		<epsilon.egl src="test.egx" outputroot="${outputRoot}" unless="${mediaOnly}">
+			<model ref="M"/>
+		</epsilon.egl>
+		<epsilon.egl src="media.egl" outputroot="${outputRoot}" if="${mediaOnly}">
 			<model ref="M"/>
 		</epsilon.egl>
 	</target>
