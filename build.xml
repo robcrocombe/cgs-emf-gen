@@ -15,7 +15,7 @@
 		</epsilon.egl>
 	</target>
 	<target name="generateMedia" depends="loadModels" if="${mediaOnly}">
-		<epsilon.egl src="media.egl" outputroot="${outputRoot}">
+		<epsilon.egl src="media.egl" target="${outputRoot}/media.html">
 			<model ref="M"/>
 		</epsilon.egl>
 	</target>
