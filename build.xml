@@ -9,12 +9,19 @@
 	    <epsilon.emf.loadModel name="M" modelfile="${model}" metamodeluri="http://cs.york.ac.uk/" read="true" store="true"/>
 	</target>
 	
+	<target name="generateAll" unless="${mediaOnly}">
+		<epsilon.egl src="test.egx" outputroot="${outputRoot}">
+			<model ref="M"/>
+		</epsilon.egl>
+	</target>
+	<target name="generateMedia" if="${mediaOnly}">
+		<epsilon.egl src="media.egl" outputroot="${outputRoot}">
+			<model ref="M"/>
+		</epsilon.egl>
+	</target>
+	
 	<target name="main" depends="loadModels">
-		<epsilon.egl src="test.egx" outputroot="${outputRoot}" unless="${mediaOnly}">
-			<model ref="M"/>
-		</epsilon.egl>
-		<epsilon.egl src="media.egl" outputroot="${outputRoot}" if="${mediaOnly}">
-			<model ref="M"/>
-		</epsilon.egl>
+		<antcall target="generateAll"/>
+		<antcall target="generateMedia"/>
 	</target>
 </project>
