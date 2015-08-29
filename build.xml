@@ -1,4 +1,5 @@
-<project name="pacs-emf-gen" default="main" description="An EMF-to-HTML generator">
+<project name="pacs-emf-gen" default="main">
+	<description>An EMF-to-HTML generator</description>
 	<!-- #file -->
 	<property name="model" value="" description="The input EMF model"/>
 	<!-- #string #optional -->
