@@ -6,7 +6,7 @@
 	
 	<target name="loadModels">
 	    <epsilon.emf.register file="test.ecore"/>
-	    <epsilon.emf.loadModel name="M" modelfile="${model}" metamodeluri="http://cs.york.ac.uk/" read="true" store="true"/>
+	    <epsilon.emf.loadModel name="M" modelfile="${model}" metamodeluri="http://cs.york.ac.uk/" read="true" store="false"/>
 	</target>
 	
 	<target name="generateAll" depends="loadModels" unless="${mediaOnly}">
