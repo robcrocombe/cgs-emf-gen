@@ -11,12 +11,12 @@
 	</target>
 	
 	<target name="generateAll" depends="loadModels" unless="${mediaOnly}">
-		<epsilon.egl src="test.egx" outputroot="${outputRoot}">
+		<epsilon.egl src="all.egx" outputroot="${outputRoot}">
 			<model ref="M"/>
 		</epsilon.egl>
 	</target>
 	<target name="generateMedia" depends="loadModels" if="${mediaOnly}">
-		<epsilon.egl src="media.egl" outputroot="${outputRoot}" target="media.html">
+		<epsilon.egl src="media.egx" outputroot="${outputRoot}">
 			<model ref="M"/>
 		</epsilon.egl>
 	</target>

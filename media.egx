@@ -1,0 +1,5 @@
+rule mediaOutput
+{
+	template: "media.egl"
+	target: "media.html"
+}
